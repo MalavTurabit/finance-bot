@@ -12,10 +12,17 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     name = Column(String)
 
+    monthly_income = Column(Float, nullable=True)
+    monthly_budget = Column(Float, nullable=True)
+    savings_goal = Column(Float, nullable=True)
+
+    onboarding_step = Column(Integer, default=0)
+
     created_at = Column(DateTime, default=datetime.utcnow)
 
     expenses = relationship("Expense", back_populates="user")
     income = relationship("Income", back_populates="user")
+
 
 
 class Income(Base):

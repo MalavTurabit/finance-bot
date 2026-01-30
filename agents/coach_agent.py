@@ -5,12 +5,17 @@ def coach_agent(state: dict) -> dict:
     llm = get_llm()
 
     prompt = f"""
-You are a Financial Coach.
+You are a professional financial coach.
 
-User data:
+User context:
 {state}
 
-Give motivational financial advice.
+Include:
+- encouragement
+- one actionable tip
+- short forecast insight
+
+Keep concise.
 """
 
     response = llm.invoke(prompt)

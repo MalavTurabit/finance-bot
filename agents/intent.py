@@ -18,7 +18,15 @@ Respond with ONLY the label.
 
 
 def classify_intent(text: str) -> str:
-    llm = get_llm()
-    chain = INTENT_PROMPT | llm
-    result = chain.invoke({"input": text})
-    return result.content.strip().lower()
+    t = text.lower()
+
+    if any(x in t for x in ["buy", "purchase", "order"]):
+        return "purchase"
+
+    if any(x in t for x in ["budget", "how much left", "remaining"]):
+        return "budget"
+
+    if any(x in t for x in ["spent", "spending", "expenses"]):
+        return "spending"
+
+    return "general"
